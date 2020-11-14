@@ -43,5 +43,3 @@ def get_distance_info(start,end):
     return distance, round(time/60.0)
 
 
-x = Path("Vancouver","Istanbul")
-print(x.distance)
