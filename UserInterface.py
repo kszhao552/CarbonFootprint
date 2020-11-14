@@ -26,12 +26,19 @@ class UserInterface:
             if event == 'Submit':
                 if values[0] == '' or values[1] == '' or values[2] == '':
                     sg.popup('Please input origin and destination and fuel economy')
-                else:
-                    self.origin = values[0]
-                    self.destination = values[1]
-                    self.fuelEconomy = float(values[2])
-                    window.close()
-                    return 0
+                else:          
+                    try:
+                        self.origin = values[0]
+                        self.destination = values[1]
+                        self.fuelEconomy = float(values[2])
+                        window.close()
+                        return 0
+
+                    except valueError:
+                        sg.popup('Fuel economy not number')
 
 l = UserInterface()
 l.Interface()
+
+
+

@@ -1,6 +1,7 @@
 
 import json
 import requests
+import sys
 from UserInterface import UserInterface
 import config 
 
@@ -10,10 +11,12 @@ class Path:
         
         
         while( True ) :
-            GUI.Interface()
+            bar = GUI.Interface()
+            if bar == -1:
+                sys.exit()
             self.origin= get_address_code(GUI.origin)
             self.destination = get_address_code(GUI.destination)
-            if  self.origin != "No Address Found" and self.destination != "No Address Found":
+            if self.origin != "No Address Found" and self.destination != "No Address Found":
                 break
 
             
@@ -42,4 +45,5 @@ def get_distance_info(start,end):
     distance = response.json()#['rows'][0]["elements"][0]["distance"]["value"]
     time = response.json()#['rows'][0]["elements"][0]["duration"]["value"]
     return distance, round(time/60.0)
+
 
