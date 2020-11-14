@@ -2,9 +2,10 @@
 import json
 import requests
 from UserInterface import UserInterface
+import config 
 
 class Path:
-    def __init__(self, origin,destination):
+    def __init__(self):
         GUI = UserInterface()
         
         
@@ -25,7 +26,7 @@ class Path:
 
 def get_address_code(address):
     clean_add = address.replace(" ","%20")
-    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key=AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
+    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key={config.api_key}")
 
     if loc_response.json()["status"] != "OK":
         return "No Address Found"
@@ -42,6 +43,3 @@ def get_distance_info(start,end):
     time = response.json()#['rows'][0]["elements"][0]["duration"]["value"]
     return distance, round(time/60.0)
 
-
-x = Path("Vancouver","Istanbul")
-print(x.distance)
