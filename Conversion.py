@@ -11,16 +11,16 @@ AIRTRAVELPERMILE = .4409
 ROUND = 2
 
 def ElecToCO2(kwh):
-   return kwh * ELECTRICTYKWH
+   return round(kwh * ELECTRICTYKWH, ROUND)
 
 def HeatingOilToCO2(gallons):
-    return gallons * HEATINGOILGALLON
+    return round(gallons * HEATINGOILGALLON, ROUND)
 
 def NatGasToCO2(cubicft):
-    return cubicft * NATURALGASS100CUBICFT
+    return round(cubicft * NATURALGASS100CUBICFT, ROUND)
 
 def PropaneToCO2(gallons):
-    return gallons * PROPANEGALLON
+    return round(gallons * PROPANEGALLON, ROUND)
 
 def UnleadedToCO2(gallons):
     return round(gallons * UNLEADEDGALLON, ROUND)
