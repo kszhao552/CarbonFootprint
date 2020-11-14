@@ -41,7 +41,6 @@ def get_distance_info(start,end):
     clean_end = end.replace('+','%2B')
 
     response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={clean_start}&destinations={clean_end}&key=AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
-    print(response.json())
     distance = response.json()#['rows'][0]["elements"][0]["distance"]["value"]
     time = response.json()#['rows'][0]["elements"][0]["duration"]["value"]
     return distance, round(time/60.0)
