@@ -3,9 +3,10 @@ import json
 import requests
 import sys
 from UserInterface import UserInterface
+import config 
 
 class Path:
-    def __init__(self, origin,destination):
+    def __init__(self):
         GUI = UserInterface()
         
         
@@ -28,7 +29,7 @@ class Path:
 
 def get_address_code(address):
     clean_add = address.replace(" ","%20")
-    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key=AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
+    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key={config.api_key}")
 
     if loc_response.json()["status"] != "OK":
         return "No Address Found"
