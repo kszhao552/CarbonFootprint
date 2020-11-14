@@ -20,5 +20,8 @@ def get_address_id(address):
 
 
 def get_distance(start,end):
-    response = requests.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:" + start +"&destination=place_id:"+ end + "&key="+"AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
-    return response.json()['rows'][0]["elements"][0]["distance"]["value"]
+    response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:{start}&destination=place_id:{end}&key=AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
+    return response.json()#     ['rows'][0]["elements"][0]["distance"]["value"]
+
+x = Path("Boston University","Boston Common")
+print(x.distance)
