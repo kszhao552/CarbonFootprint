@@ -49,5 +49,5 @@ while True:
 
     sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith this trip, your carbon footprint will increase by {tripCarbon} Ibs CO₂")
     totalCarbon += tripCarbon
-
+totalCarbon = round(totalCarbon)
 sg.popup(f"Your annual carbon footprint is\n{totalCarbon} Ibs CO₂/year")
