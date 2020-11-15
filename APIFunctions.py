@@ -6,19 +6,19 @@ import config
 
 class Path:
     def __init__(self):
-        GUI = UserInterface()
+        self.GUI = UserInterface()
         self.origin_lat = 0
         self.origin_lng = 0
         self.destination_lat =0
         self.destination_lng = 0
         
         while( True ) :
-            bar = GUI.Interface()
+            bar = self.GUI.Interface()
             if bar == -1:
                 sys.exit()
-            self.origin_lat,self.origin_lng= get_address_code(GUI.origin)
+            self.origin_lat,self.origin_lng= get_address_code(self.GUI.origin)
 
-            self.destination_lat,self.destination_lng = get_address_code(GUI.destination)
+            self.destination_lat,self.destination_lng = get_address_code(self.GUI.destination)
             if self.origin_lng != None and self.destination_lng != None:
                 break
 

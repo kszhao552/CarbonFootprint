@@ -5,10 +5,10 @@ class UserInterface:
         self.origin = ''
         self.fuelEconomy = 0
         self.AirDistance = 0
-        self.Diesel = None
+        self.diesel = None
         self.kwh = 0
         self.gallonsPropane = 0
-        self.gallonsNatGas = 0
+        self.cubicFeetNatGas = 0
         self.gallonsHeatOil = 0
 
     def Interface(self):
@@ -51,7 +51,7 @@ class UserInterface:
         layout = [ 
             [sg.Text('Kilowatt Hours of Electricity'), sg.InputText()], 
             [sg.Text('Gallons of Propane'), sg.InputText()],
-            [sg.Text('Gallons of Natural Gas'), sg.InputText()],
+            [sg.Text('Natural Gas per 100 cubic feet'), sg.InputText()],
             [sg.Text('Gallons of Heating Oil'), sg.InputText()],
             [sg.Submit(), sg.Cancel()] 
         ] 
@@ -74,7 +74,7 @@ class UserInterface:
                     try:
                         self.kwh = float(values[0])
                         self.gallonsPropane = float(values[1])
-                        self.gallonsNatGas = float(values[2])
+                        self.cubicFeetNatGas = float(values[2])
                         self.gallonsHeatOil = float(values[3])
                         window.close()
                         return 0
