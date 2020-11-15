@@ -80,12 +80,3 @@ class UserInterface:
 
                     except ValueError:
                         sg.popup('One or more of your inputs is not a number, please try again')
-
-
-
-
-l = UserInterface()
-l.SecondInterface()
-
-
-
