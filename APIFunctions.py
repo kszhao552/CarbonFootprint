@@ -43,9 +43,11 @@ def get_address_code(address):
 
 def get_distance_info(startlat,startlong,endlat,endlong):
     
-    response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={startlat}|{startlong}&destinations={endlat}|{endlong}&key={config.api_key}")
-    distance = response.json()['rows'][0]["elements"][0]["distance"]["value"]
-    time = response.json()['rows'][0]["elements"][0]["duration"]["value"]
-    return distance, round(time/60.0)
+    response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={startlat}|{startlong}&destinations={endlat}|{endlong}&key={config.api_key}").json()
+    print(response)
+    distance = response#['rows'][0]["elements"][0]["distance"]["value"]
+    time = response#['rows'][0]["elements"][0]["duration"]["value"]
+    return distance, time #round(time/60.0)
 
-
+x = Path()
+print(x.distance)
