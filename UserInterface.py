@@ -15,7 +15,7 @@ class UserInterface:
         layout = [ 
             [sg.Text('Origin'), sg.InputText()], 
             [sg.Text('Destination'), sg.InputText()],
-            [sg.Text('Air Distance Traveled'), sg.InputText()],
+            [sg.Text('Air Distance Traveled in Past Year'), sg.InputText()],
             [sg.Text('Fuel Economy'), sg.InputText()],
             [sg.Radio('Diesel', 1, key='-IN-', default = True), sg.Radio('Unleaded', 1)],
             [sg.Submit(), sg.Cancel()] 
