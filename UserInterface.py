@@ -34,7 +34,6 @@ class UserInterface:
                         self.destination = values[1]
                         self.fuelEconomy = float(values[2])
                         self.diesel = values['-IN-']
-                        sg.popup(self.diesel)
                         window.close()
                         return 0
 
