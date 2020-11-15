@@ -8,6 +8,8 @@ UNLEADEDGALLON = 19.3565
 DIESELGALLON = 22.5092
 AIRTRAVELPERMILE = .4409
 
+METERSTOMILESDIVISOR = 1609
+
 ROUND = 2
 
 def ElecToCO2(kwh):
@@ -34,3 +36,5 @@ def AirTravelToCO2(miles):
 def GallonsUsed(fuelEconomy, distance):
     return round(float(distance/fuelEconomy), ROUND)
 
+def MetersToMiles(meters):
+    return round(float(distance/METERSTOMILESDIVISOR = 1609), ROUND)
