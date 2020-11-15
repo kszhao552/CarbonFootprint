@@ -8,19 +8,23 @@ import config
 class Path:
     def __init__(self):
         GUI = UserInterface()
-        
+        self.origin_lat = 0
+        self.origin_lng = 0
+        self.destination_lat =0
+        self.destination_lng = 0
         
         while( True ) :
             bar = GUI.Interface()
             if bar == -1:
                 sys.exit()
-            self.origin= get_address_code(GUI.origin)
-            self.destination = get_address_code(GUI.destination)
-            if self.origin != "No Address Found" and self.destination != "No Address Found":
+            self.origin_lat,self.origin_lng= get_address_code(GUI.origin)
+
+            self.destination_lat,self.destination_lng = get_address_code(GUI.destination)
+            if self.origin_lng != None and self.destination_lng != None:
                 break
 
             
-        self.distance, self.time = get_distance_info(self.origin,self.destination)
+        self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
         
 
     
@@ -29,21 +33,19 @@ class Path:
 
 def get_address_code(address):
     clean_add = address.replace(" ","%20")
-    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key={config.api_key}")
+    loc_response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={clean_add}&key={config.api_key}").json()
 
-    if loc_response.json()["status"] != "OK":
-        return "No Address Found"
+    if loc_response["status"] != "OK":
+        return None,None
     
-    return loc_response.json()['results'][0]['plus_code']["global_code"]
+    return loc_response['results'][0]['geometry']["location"]["lat"],loc_response['results'][0]['geometry']["location"]["lng"]
 
 
-def get_distance_info(start,end):
-    clean_start = start.replace('+','%2B')
-    clean_end = end.replace('+','%2B')
-
-    response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={clean_start}&destinations={clean_end}&key=AIzaSyAYZcB1L-QlsdsJSP-gYx7pkPreirPET1Q")
-    distance = response.json()#['rows'][0]["elements"][0]["distance"]["value"]
-    time = response.json()#['rows'][0]["elements"][0]["duration"]["value"]
+def get_distance_info(startlat,startlong,endlat,endlong):
+    
+    response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={startlat}|{startlong}&destinations={endlat}|{endlong}&key={config.api_key}")
+    distance = response.json()['rows'][0]["elements"][0]["distance"]["value"]
+    time = response.json()['rows'][0]["elements"][0]["duration"]["value"]
     return distance, round(time/60.0)
 
 

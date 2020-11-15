@@ -40,8 +40,5 @@ class UserInterface:
                     except ValueError:
                         sg.popup('Fuel economy not number')
 
-l = UserInterface()
-l.Interface()
-
 
 
