@@ -24,8 +24,12 @@ class Path:
 
             
         self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+        if(self.distance == None):
+            sys.exit()
 
     def destinations(self):
+        self.GUI.origin = ''
+        self.GUI.destination = ''
         self.origin_lat = 0
         self.origin_lng = 0
         self.destination_lat =0
@@ -41,6 +45,8 @@ class Path:
             if self.origin_lng != None and self.destination_lng != None:
                 break
         self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+        if(self.distance == None):
+            sys.exit()
         return 0
 
 
@@ -60,6 +66,17 @@ def get_address_code(address):
 
 def get_distance_info(startlat,startlong,endlat,endlong):
     response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={startlat},{startlong}&destinations={endlat},{endlong}&key={config.api_key}").json()
+
+    if response["status"] != "OK":
+        return None,None
+    
+    if response['rows'][0]['elements'][0]['status']=='ZERO_RESULTS':
+        return None,None
     distance = response['rows'][0]["elements"][0]["distance"]["value"]
     time = response['rows'][0]["elements"][0]["duration"]["value"]
     return distance, round(time/60.0)
+"""
+a1,a2 = get_address_code("hong kong")
+b1,b2 = get_address_code("boston")
+print(get_distance_info(a1,a2,b1,b2))
+"""

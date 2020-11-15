@@ -43,10 +43,15 @@ sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith t
 totalCarbon += tripCarbon
 
 while True:
-    var = path.GUI.ThirdInterface()
+    var = path.destinations()
     if var == -1:
         break
-
+    distance =Conversion.MetersToMiles(path.distance)
+    gallonsDriven = Conversion.GallonsUsed(fuelEconomy,distance)
+    if diesel:
+        tripCarbon = Conversion.DieseltoCO2(gallonsDriven)
+    else:
+        tripCarbon = Conversion.UnleadedToCO2(gallonsDriven)
     sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith this trip, your carbon footprint will increase by {tripCarbon} Ibs CO₂")
     totalCarbon += tripCarbon
 totalCarbon = round(totalCarbon)
