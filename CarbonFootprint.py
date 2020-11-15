@@ -17,7 +17,6 @@ gallonsHeatOil = path.GUI.gallonsHeatOil * 12
 distance = path.distance
 distance = Conversion.MetersToMiles(distance)
 totalDistance = path.GUI.carDistance
-totalDistance = Conversion.MetersToMiles(totalDistance)
 time = path.time
 fuelEconomy = path.GUI.fuelEconomy
 diesel = path.GUI.diesel
