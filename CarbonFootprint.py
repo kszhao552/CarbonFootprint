@@ -16,21 +16,38 @@ cubicFeetNatGas = path.GUI.cubicFeetNatGas * 12
 gallonsHeatOil = path.GUI.gallonsHeatOil * 12
 distance = path.distance
 distance = Conversion.MetersToMiles(distance)
+totalDistance = path.GUI.carDistance
+totalDistance = Conversion.MetersToMiles(totalDistance)
 time = path.time
 fuelEconomy = path.GUI.fuelEconomy
 diesel = path.GUI.diesel
 airDistance = path.GUI.airDistance
 gallonsDriven = Conversion.GallonsUsed(fuelEconomy,distance)
-
+totalGallonsDriven = Conversion.GallonsUsed(fuelEconomy,totalDistance)
 totalCarbon += Conversion.ElecToCO2(kwh)
 totalCarbon += Conversion.HeatingOilToCO2(gallonsHeatOil)
 totalCarbon += Conversion.NatGasToCO2(cubicFeetNatGas)
 totalCarbon += Conversion.PropaneToCO2(gallonsPropane)
 if diesel:
     tripCarbon += Conversion.DieseltoCO2(gallonsDriven)
+    totalCarbon += Conversion.DieseltoCO2(totalGallonsDriven)
 else:
     tripCarbon += Conversion.UnleadedToCO2(gallonsDriven)
+    totalCarbon += Conversion.UnleadedToCO2(totalGallonsDriven)
+
 totalCarbon += Conversion.AirTravelToCO2(airDistance)
 totalCarbon = round(totalCarbon)
 
-sg.popup("Your annual carbon footprint is", totalCarbon, "Ibs CO₂/year", "With this trip, your carbon footprint will increase by", tripCarbon, "Ibs CO₂")
+sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith this trip, your carbon footprint will increase by {tripCarbon} Ibs CO₂")
+
+totalCarbon += tripCarbon
+
+while True:
+    var = path.GUI.ThirdInterface()
+    if var == -1:
+        break
+
+    sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith this trip, your carbon footprint will increase by {tripCarbon} Ibs CO₂")
+    totalCarbon += tripCarbon
+totalCarbon = round(totalCarbon)
+sg.popup(f"Your annual carbon footprint is\n{totalCarbon} Ibs CO₂/year")
