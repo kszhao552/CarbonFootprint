@@ -24,7 +24,25 @@ class Path:
 
             
         self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+
+    def destinations(self):
+        self.origin_lat = 0
+        self.origin_lng = 0
+        self.destination_lat =0
+        self.destination_lng = 0
         
+        while( True ) :
+            bar = self.GUI.ThirdInterface()
+            if bar == -1:
+                return -1
+            self.origin_lat,self.origin_lng= get_address_code(self.GUI.origin)
+
+            self.destination_lat,self.destination_lng = get_address_code(self.GUI.destination)
+            if self.origin_lng != None and self.destination_lng != None:
+                break
+        self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+        return 0
+
 
     
 

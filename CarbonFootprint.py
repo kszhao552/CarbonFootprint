@@ -34,3 +34,15 @@ totalCarbon += Conversion.AirTravelToCO2(airDistance)
 totalCarbon = round(totalCarbon)
 
 sg.popup("Your annual carbon footprint is", totalCarbon, "Ibs CO₂/year", "With this trip, your carbon footprint will increase by", tripCarbon, "Ibs CO₂")
+
+totalCarbon += tripCarbon
+
+while True:
+    var = path.GUI.ThirdInterface()
+    if var == -1:
+        break
+
+    sg.popup("Your annual carbon footprint is", totalCarbon, "Ibs CO₂/year", "With this trip, your carbon footprint will increase by", tripCarbon, "Ibs CO₂")
+    totalCarbon += tripCarbon
+
+sg.popup("Your annual carbon footprint is", totalCarbon, "Ibs CO₂/year")

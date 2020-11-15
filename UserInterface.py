@@ -92,7 +92,7 @@ class UserInterface:
             [sg.Submit(), sg.Cancel()]
             ]
             
-        window = sg.Window('Input Locations', layout)
+        window = sg.Window('Make a Trip', layout)
 
             
         while True:
@@ -110,4 +110,3 @@ class UserInterface:
                         self.destination = values[1]
                         window.close()
                         return 0
-        ]
