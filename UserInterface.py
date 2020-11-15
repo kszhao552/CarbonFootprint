@@ -34,11 +34,8 @@ class UserInterface:
                         window.close()
                         return 0
 
-                    except valueError:
+                    except ValueError:
                         sg.popup('Fuel economy not number')
-
-l = UserInterface()
-l.Interface()
 
 
 
