@@ -1,6 +1,7 @@
 import json
 import requests
 import Conversion
+import Comparisons
 from UserInterface import UserInterface
 from APIFunctions import Path
 import PySimpleGUI as sg
@@ -17,7 +18,6 @@ gallonsHeatOil = path.GUI.gallonsHeatOil * 12
 distance = path.distance
 distance = Conversion.MetersToMiles(distance)
 totalDistance = path.GUI.carDistance
-totalDistance = Conversion.MetersToMiles(totalDistance)
 time = path.time
 fuelEconomy = path.GUI.fuelEconomy
 diesel = path.GUI.diesel
@@ -55,4 +55,10 @@ while True:
     sg.popup(f"Your annual carbon footprint is {totalCarbon} Ibs CO₂/year.\nWith this trip, your carbon footprint will increase by {tripCarbon} Ibs CO₂")
     totalCarbon += tripCarbon
 totalCarbon = round(totalCarbon)
-sg.popup(f"Your annual carbon footprint is\n{totalCarbon} Ibs CO₂/year")
+totalResult = Comparisons.totalFootprintComp(totalCarbon)
+if (totalResult[1] == 1):
+    totalComparison = 'less'
+else:
+    totalComparison = 'more'
+
+sg.popup(f"Your annual carbon footprint is\n{totalCarbon} Ibs CO₂/year.\n Your usage is {totalResult[0]} % {totalComparison} compared to the national average")
