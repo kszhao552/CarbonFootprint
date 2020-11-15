@@ -4,12 +4,14 @@ class UserInterface:
         self.destination = ''
         self.origin = ''
         self.fuelEconomy = 0
+        self.AirDistance = 0
         self.Diesel = None
 
     def Interface(self):
         layout = [ 
             [sg.Text('Origin'), sg.InputText()], 
             [sg.Text('Destination'), sg.InputText()],
+            [sg.Text('Air Distance Traveled'), sg.InputText()]
             [sg.Text('Fuel Economy'), sg.InputText()],
             [sg.Radio('Diesel', 1, key='-IN-', default = True), sg.Radio('Unleaded', 1)],
             [sg.Submit(), sg.Cancel()] 
@@ -32,13 +34,14 @@ class UserInterface:
                     try:
                         self.origin = values[0]
                         self.destination = values[1]
-                        self.fuelEconomy = float(values[2])
+                        self.fuelEconomy = float(values[3])
+                        self.airDistance = float(values[2])
                         self.diesel = values['-IN-']
                         window.close()
                         return 0
 
                     except ValueError:
-                        sg.popup('Fuel economy not number')
+                        sg.popup('Fuel economy or air distance not number')
 
 l = UserInterface()
 l.Interface()
