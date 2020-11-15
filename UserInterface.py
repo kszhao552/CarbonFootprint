@@ -59,6 +59,7 @@ class UserInterface:
         window = sg.Window('Input Your Monthly Utility Usage', layout)
 
 
+
         while True:
             event, values = window.read() 
 
