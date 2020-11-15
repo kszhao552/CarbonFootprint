@@ -103,8 +103,8 @@ class UserInterface:
                 return -1
     
             if event == 'Submit':
-                if values[0] == '' or values[1] == '' or values[2] == '':
-                    sg.popup('Please input origin and destination and fuel economy')
+                if values[0] == '' or values[1] == '':
+                    sg.popup('Please input origin and destination')
                 else:
                         self.origin = values[0]
                         self.destination = values[1]
