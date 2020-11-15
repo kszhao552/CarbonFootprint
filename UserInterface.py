@@ -10,12 +10,14 @@ class UserInterface:
         self.gallonsPropane = 0
         self.cubicFeetNatGas = 0
         self.gallonsHeatOil = 0
+        self.carDistance = 0
 
     def Interface(self):
         layout = [ 
             [sg.Text('Origin'), sg.InputText()], 
             [sg.Text('Destination'), sg.InputText()],
             [sg.Text('Air Distance Traveled in Past Year'), sg.InputText()],
+            [sg.Text('Car Distance Traveled in Past Year'), sg.InputText()],
             [sg.Text('Fuel Economy'), sg.InputText()],
             [sg.Radio('Diesel', 1, key='-IN-', default = True), sg.Radio('Unleaded', 1)],
             [sg.Submit(), sg.Cancel()] 
@@ -38,8 +40,9 @@ class UserInterface:
                     try:
                         self.origin = values[0]
                         self.destination = values[1]
-                        self.fuelEconomy = float(values[3])
+                        self.fuelEconomy = float(values[4])
                         self.airDistance = float(values[2])
+                        self.carDistance = float(values[3])
                         self.diesel = values['-IN-']
                         window.close()
                         return 0
@@ -81,3 +84,6 @@ class UserInterface:
 
                     except ValueError:
                         sg.popup('One or more of your inputs is not a number, please try again')
+
+l = UserInterface()
+l.Interface()
