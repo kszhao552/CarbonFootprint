@@ -6,25 +6,43 @@ import config
 
 class Path:
     def __init__(self):
-        GUI = UserInterface()
+        self.GUI = UserInterface()
         self.origin_lat = 0
         self.origin_lng = 0
         self.destination_lat =0
         self.destination_lng = 0
         
         while( True ) :
-            bar = GUI.Interface()
+            bar = self.GUI.Interface()
             if bar == -1:
                 sys.exit()
-            self.origin_lat,self.origin_lng= get_address_code(GUI.origin)
+            self.origin_lat,self.origin_lng= get_address_code(self.GUI.origin)
 
-            self.destination_lat,self.destination_lng = get_address_code(GUI.destination)
+            self.destination_lat,self.destination_lng = get_address_code(self.GUI.destination)
             if self.origin_lng != None and self.destination_lng != None:
                 break
 
             
         self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+
+    def destinations(self):
+        self.origin_lat = 0
+        self.origin_lng = 0
+        self.destination_lat =0
+        self.destination_lng = 0
         
+        while( True ) :
+            bar = self.GUI.ThirdInterface()
+            if bar == -1:
+                return -1
+            self.origin_lat,self.origin_lng= get_address_code(self.GUI.origin)
+
+            self.destination_lat,self.destination_lng = get_address_code(self.GUI.destination)
+            if self.origin_lng != None and self.destination_lng != None:
+                break
+        self.distance, self.time = get_distance_info(self.origin_lat,self.origin_lng,self.destination_lat,self.destination_lng)
+        return 0
+
 
     
 
@@ -41,7 +59,6 @@ def get_address_code(address):
 
 
 def get_distance_info(startlat,startlong,endlat,endlong):
-    print(startlat,startlong,endlat,endlong)
     response = requests.get(f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={startlat},{startlong}&destinations={endlat},{endlong}&key={config.api_key}").json()
     distance = response['rows'][0]["elements"][0]["distance"]["value"]
     time = response['rows'][0]["elements"][0]["duration"]["value"]
