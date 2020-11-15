@@ -37,4 +37,4 @@ def GallonsUsed(fuelEconomy, distance):
     return round(float(distance/fuelEconomy), ROUND)
 
 def MetersToMiles(meters):
-    return round(float(distance/METERSTOMILESDIVISOR = 1609), ROUND)
+    return round(float(meters/1609), ROUND)
